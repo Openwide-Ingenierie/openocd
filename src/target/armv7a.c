@@ -160,7 +160,7 @@ int armv7a_mmu_translate_va(struct target *target,  uint32_t va, uint32_t *val)
 	LOG_DEBUG("1st lvl desc: %8.8" PRIx32 "", first_lvl_descriptor);
 
 	if ((first_lvl_descriptor & 0x3) == 0) {
-		LOG_ERROR("Address translation failure");
+		LOG_ERROR("First level address translation failure, virtual address 0x%08X", va);
 		return ERROR_TARGET_TRANSLATION_FAULT;
 	}
 
@@ -193,7 +193,7 @@ int armv7a_mmu_translate_va(struct target *target,  uint32_t va, uint32_t *val)
 	LOG_DEBUG("2nd lvl desc: %8.8" PRIx32 "", second_lvl_descriptor);
 
 	if ((second_lvl_descriptor & 0x3) == 0) {
-		LOG_ERROR("Address translation failure");
+		LOG_ERROR("Second level address translation failure, virtual address 0x%08X", va);
 		return ERROR_TARGET_TRANSLATION_FAULT;
 	}
 
@@ -215,7 +215,7 @@ int armv7a_mmu_translate_va(struct target *target,  uint32_t va, uint32_t *val)
 	}
 
 	/* should not happen */
-	LOG_ERROR("Address translation failure");
+	LOG_ERROR("Address translation failure, virtual address 0x%08X", va);
 	return ERROR_TARGET_TRANSLATION_FAULT;
 
 done:
