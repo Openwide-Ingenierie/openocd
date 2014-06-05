@@ -115,7 +115,7 @@ static int armv7a_read_ttbcr(struct target *target)
 		armv7a->armv7a_mmu.os_border = 0xffffffff & armv7a->armv7a_mmu.ttbr0_mask;
 	} else {
 		/*  fix me , default is hard coded LINUX border  */
-		armv7a->armv7a_mmu.os_border = 0xc0000000;
+		armv7a->armv7a_mmu.os_border = 0x00000000;
 	}
 done:
 	dpm->finish(dpm);
